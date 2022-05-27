@@ -9,7 +9,6 @@ Resource    ../resources/Resources.robot
 Create_new_pet
     ${petId}=  get_random_id
     ${pet_name}=  get_random_name
-    log to console  ${pet_name}
     Set global variable  ${petId}
     create session      petstore_api     ${base_url}
     ${body}=  create dictionary  id=${petId}  name=${pet_name}  status=available
@@ -23,7 +22,6 @@ Create_new_pet
 Rename_pet
     create session  petstore_api  ${base_url}
     ${new_name}=  get_random_name  new_name
-    log to console  ${new_name}
     ${body}=  create dictionary  id=${petId}  name=${new_name}  status=taken away
     ${header}=  create dictionary  Content-Type=application/json
     ${response}=  put request  petstore_api  /v2/pet  data=${body}  headers=${header}

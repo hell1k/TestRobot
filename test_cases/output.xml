@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.5 on win32)" generated="20220527 12:35:26.210" rpa="false" schemaversion="3">
+<suite id="s1" name="PetStoreRequests" source="C:\Users\i20\PycharmProjects\TestRobot\test_cases\PetStoreRequests.robot">
+<test id="s1-t1" name="Create_new_pet" line="9">
+<kw name="Get Random Id" library="CustomLibrary">
+<var>${petId}</var>
+<msg timestamp="20220527 12:35:26.356" level="INFO">${petId} = 9887</msg>
+<status status="PASS" starttime="20220527 12:35:26.355" endtime="20220527 12:35:26.356"/>
+</kw>
+<kw name="Get Random Name" library="CustomLibrary">
+<var>${pet_name}</var>
+<msg timestamp="20220527 12:35:26.356" level="INFO">${pet_name} = Sharik</msg>
+<status status="PASS" starttime="20220527 12:35:26.356" endtime="20220527 12:35:26.356"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${pet_name}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220527 12:35:26.356" endtime="20220527 12:35:26.357"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${petId}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20220527 12:35:26.357" level="INFO">${petId} = 9887</msg>
+<status status="PASS" starttime="20220527 12:35:26.357" endtime="20220527 12:35:26.357"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>petstore_api</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220527 12:35:26.357" level="INFO">Creating Session using : alias=petstore_api, url=https://petstore.swagger.io, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220527 12:35:26.357" endtime="20220527 12:35:26.358"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>id=${petId}</arg>
+<arg>name=${pet_name}</arg>
+<arg>status=available</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220527 12:35:26.358" level="INFO">${body} = {'id': 9887, 'name': 'Sharik', 'status': 'available'}</msg>
+<status status="PASS" starttime="20220527 12:35:26.358" endtime="20220527 12:35:26.358"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220527 12:35:26.359" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20220527 12:35:26.359" endtime="20220527 12:35:26.359"/>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>petstore_api</arg>
+<arg>/v2/pet</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>*DEPRECATED* Please use `POST On Session` instead.</doc>
+<msg timestamp="20220527 12:35:26.359" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg timestamp="20220527 12:35:27.219" level="INFO">POST Request : url=https://petstore.swagger.io/v2/pet 
+ path_url=/v2/pet 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '53'} 
+ body={"id": 9887, "name": "Sharik", "status": "available"} 
+ </msg>
+<msg timestamp="20220527 12:35:27.219" level="INFO">POST Response : url=https://petstore.swagger.io/v2/pet 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 27 May 2022 05:35:25 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"id":9887,"name":"Sharik","photoUrls":[],"tags":[],"status":"available"} 
+ </msg>
+<msg timestamp="20220527 12:35:27.219" level="INFO">c:\users\i20\pycharmprojects\testrobot\venv\lib\site-packages\urllib3\connectionpool.py:1043: InsecureRequestWarning: Unverified HTTPS request is being made to host 'petstore.swagger.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20220527 12:35:27.220" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220527 12:35:26.359" endtime="20220527 12:35:27.220"/>
+</kw>
+<kw name="Get_status_code" library="Resources">
+<var>${status_code}</var>
+<arg>${response}</arg>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220527 12:35:27.225" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20220527 12:35:27.223" endtime="20220527 12:35:27.225"/>
+</kw>
+<msg timestamp="20220527 12:35:27.226" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20220527 12:35:27.221" endtime="20220527 12:35:27.226"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220527 12:35:27.226" endtime="20220527 12:35:27.226"/>
+</kw>
+<kw name="Check_pet" library="Resources">
+<arg>${petId}</arg>
+<arg>200</arg>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>petstore_api</arg>
+<arg>/v2/pet/${id}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20220527 12:35:27.227" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20220527 12:35:27.396" level="INFO">GET Request : url=https://petstore.swagger.io/v2/pet/9887 
+ path_url=/v2/pet/9887 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220527 12:35:27.396" level="INFO">GET Response : url=https://petstore.swagger.io/v2/pet/9887 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 27 May 2022 05:35:25 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"id":9887,"name":"Sharik","photoUrls":[],"tags":[],"status":"available"} 
+ </msg>
+<msg timestamp="20220527 12:35:27.397" level="INFO">c:\users\i20\pycharmprojects\testrobot\venv\lib\site-packages\urllib3\connectionpool.py:1043: InsecureRequestWarning: Unverified HTTPS request is being made to host 'petstore.swagger.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20220527 12:35:27.398" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220527 12:35:27.227" endtime="20220527 12:35:27.398"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220527 12:35:27.401" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20220527 12:35:27.398" endtime="20220527 12:35:27.401"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>${status}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220527 12:35:27.401" endtime="20220527 12:35:27.402"/>
+</kw>
+<status status="PASS" starttime="20220527 12:35:27.227" endtime="20220527 12:35:27.402"/>
+</kw>
+<status status="PASS" starttime="20220527 12:35:26.355" endtime="20220527 12:35:27.403"/>
+</test>
+<test id="s1-t2" name="Rename_pet" line="23">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>petstore_api</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220527 12:35:27.404" level="INFO">Creating Session using : alias=petstore_api, url=https://petstore.swagger.io, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220527 12:35:27.404" endtime="20220527 12:35:27.404"/>
+</kw>
+<kw name="Get Random Name" library="CustomLibrary">
+<var>${new_name}</var>
+<arg>new_name</arg>
+<msg timestamp="20220527 12:35:27.405" level="INFO">${new_name} = Korjik</msg>
+<status status="PASS" starttime="20220527 12:35:27.404" endtime="20220527 12:35:27.405"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${new_name}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220527 12:35:27.405" endtime="20220527 12:35:27.405"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>id=${petId}</arg>
+<arg>name=${new_name}</arg>
+<arg>status=taken away</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220527 12:35:27.406" level="INFO">${body} = {'id': 9887, 'name': 'Korjik', 'status': 'taken away'}</msg>
+<status status="PASS" starttime="20220527 12:35:27.405" endtime="20220527 12:35:27.406"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220527 12:35:27.406" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20220527 12:35:27.406" endtime="20220527 12:35:27.406"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>petstore_api</arg>
+<arg>/v2/pet</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>*DEPRECATED* Please use `PUT On Session` instead.</doc>
+<msg timestamp="20220527 12:35:27.407" level="WARN">Keyword 'RequestsLibrary.Put Request' is deprecated. Please use `PUT On Session` instead.</msg>
+<msg timestamp="20220527 12:35:28.126" level="INFO">PUT Request : url=https://petstore.swagger.io/v2/pet 
+ path_url=/v2/pet 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '54'} 
+ body={"id": 9887, "name": "Korjik", "status": "taken away"} 
+ </msg>
+<msg timestamp="20220527 12:35:28.126" level="INFO">PUT Response : url=https://petstore.swagger.io/v2/pet 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 27 May 2022 05:35:26 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"id":9887,"name":"Korjik","photoUrls":[],"tags":[],"status":"taken away"} 
+ </msg>
+<msg timestamp="20220527 12:35:28.127" level="INFO">c:\users\i20\pycharmprojects\testrobot\venv\lib\site-packages\urllib3\connectionpool.py:1043: InsecureRequestWarning: Unverified HTTPS request is being made to host 'petstore.swagger.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20220527 12:35:28.128" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220527 12:35:27.406" endtime="20220527 12:35:28.128"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${response_body}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220527 12:35:28.132" level="INFO">${response_body} = {"id":9887,"name":"Korjik","photoUrls":[],"tags":[],"status":"taken away"}</msg>
+<status status="PASS" starttime="20220527 12:35:28.130" endtime="20220527 12:35:28.132"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${response_body}</arg>
+<arg>${new_name}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20220527 12:35:28.134" endtime="20220527 12:35:28.134"/>
+</kw>
+<kw name="Check_pet" library="Resources">
+<arg>${petId}</arg>
+<arg>200</arg>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>petstore_api</arg>
+<arg>/v2/pet/${id}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20220527 12:35:28.136" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20220527 12:35:28.307" level="INFO">GET Request : url=https://petstore.swagger.io/v2/pet/9887 
+ path_url=/v2/pet/9887 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220527 12:35:28.307" level="INFO">GET Response : url=https://petstore.swagger.io/v2/pet/9887 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 27 May 2022 05:35:26 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"id":9887,"name":"Korjik","photoUrls":[],"tags":[],"status":"taken away"} 
+ </msg>
+<msg timestamp="20220527 12:35:28.307" level="INFO">c:\users\i20\pycharmprojects\testrobot\venv\lib\site-packages\urllib3\connectionpool.py:1043: InsecureRequestWarning: Unverified HTTPS request is being made to host 'petstore.swagger.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20220527 12:35:28.308" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220527 12:35:28.136" endtime="20220527 12:35:28.308"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220527 12:35:28.311" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20220527 12:35:28.309" endtime="20220527 12:35:28.311"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>${status}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220527 12:35:28.312" endtime="20220527 12:35:28.313"/>
+</kw>
+<status status="PASS" starttime="20220527 12:35:28.136" endtime="20220527 12:35:28.313"/>
+</kw>
+<status status="PASS" starttime="20220527 12:35:27.403" endtime="20220527 12:35:28.314"/>
+</test>
+<test id="s1-t3" name="Delete_pet" line="35">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>petstore_api</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220527 12:35:28.315" level="INFO">Creating Session using : alias=petstore_api, url=https://petstore.swagger.io, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220527 12:35:28.315" endtime="20220527 12:35:28.315"/>
+</kw>
+<kw name="Delete Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>petstore_api</arg>
+<arg>/v2/pet/${petId}</arg>
+<doc>*DEPRECATED* Please use `DELETE On Session` instead.</doc>
+<msg timestamp="20220527 12:35:28.316" level="WARN">Keyword 'RequestsLibrary.Delete Request' is deprecated. Please use `DELETE On Session` instead.</msg>
+<msg timestamp="20220527 12:35:29.009" level="INFO">DELETE Request : url=https://petstore.swagger.io/v2/pet/9887 
+ path_url=/v2/pet/9887 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20220527 12:35:29.009" level="INFO">DELETE Response : url=https://petstore.swagger.io/v2/pet/9887 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 27 May 2022 05:35:27 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"9887"} 
+ </msg>
+<msg timestamp="20220527 12:35:29.009" level="INFO">c:\users\i20\pycharmprojects\testrobot\venv\lib\site-packages\urllib3\connectionpool.py:1043: InsecureRequestWarning: Unverified HTTPS request is being made to host 'petstore.swagger.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20220527 12:35:29.009" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220527 12:35:28.316" endtime="20220527 12:35:29.009"/>
+</kw>
+<kw name="Get_status_code" library="Resources">
+<var>${status_code}</var>
+<arg>${response}</arg>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220527 12:35:29.010" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20220527 12:35:29.010" endtime="20220527 12:35:29.010"/>
+</kw>
+<msg timestamp="20220527 12:35:29.011" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20220527 12:35:29.010" endtime="20220527 12:35:29.011"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220527 12:35:29.011" endtime="20220527 12:35:29.011"/>
+</kw>
+<kw name="Check_pet" library="Resources">
+<arg>${petId}</arg>
+<arg>404</arg>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>petstore_api</arg>
+<arg>/v2/pet/${id}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20220527 12:35:29.012" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20220527 12:35:29.186" level="INFO">GET Request : url=https://petstore.swagger.io/v2/pet/9887 
+ path_url=/v2/pet/9887 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220527 12:35:29.187" level="INFO">GET Response : url=https://petstore.swagger.io/v2/pet/9887 
+ status=404, reason=Not Found 
+ headers={'Date': 'Fri, 27 May 2022 05:35:27 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":1,"type":"error","message":"Pet not found"} 
+ </msg>
+<msg timestamp="20220527 12:35:29.187" level="INFO">c:\users\i20\pycharmprojects\testrobot\venv\lib\site-packages\urllib3\connectionpool.py:1043: InsecureRequestWarning: Unverified HTTPS request is being made to host 'petstore.swagger.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20220527 12:35:29.188" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20220527 12:35:29.012" endtime="20220527 12:35:29.188"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220527 12:35:29.191" level="INFO">${status_code} = 404</msg>
+<status status="PASS" starttime="20220527 12:35:29.188" endtime="20220527 12:35:29.191"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>${status}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220527 12:35:29.191" endtime="20220527 12:35:29.193"/>
+</kw>
+<status status="PASS" starttime="20220527 12:35:29.012" endtime="20220527 12:35:29.193"/>
+</kw>
+<status status="PASS" starttime="20220527 12:35:28.314" endtime="20220527 12:35:29.193"/>
+</test>
+<status status="PASS" starttime="20220527 12:35:26.212" endtime="20220527 12:35:29.195"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="3" fail="0" skip="0" id="s1" name="PetStoreRequests">PetStoreRequests</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20220527 12:35:26.359" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg timestamp="20220527 12:35:27.227" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20220527 12:35:27.407" level="WARN">Keyword 'RequestsLibrary.Put Request' is deprecated. Please use `PUT On Session` instead.</msg>
+<msg timestamp="20220527 12:35:28.136" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20220527 12:35:28.316" level="WARN">Keyword 'RequestsLibrary.Delete Request' is deprecated. Please use `DELETE On Session` instead.</msg>
+<msg timestamp="20220527 12:35:29.012" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+</errors>
+</robot>
